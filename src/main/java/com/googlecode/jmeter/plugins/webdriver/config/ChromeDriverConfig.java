@@ -64,6 +64,21 @@ public class ChromeDriverConfig extends WebDriverConfig<ChromeDriver> {
         return capabilities;
     }
 
+
+    ChromeOptions createChromeOptions(){
+        ChromeOptions co = new ChromeOptions();
+        co.setProxy(createProxy());
+        LoggingPreferences logPrefs = new LoggingPreferences();
+        logPrefs.enable(LogType.BROWSER, Level.ALL);
+        co.setCapability(CapabilityType.LOGGING_PREFS, logPrefs);
+        co.setHeadless(isHeadlessEnabled());
+        if (isAndroidEnabled()) {
+            co.setExperimentalOption("androidPackage", "com.android.chrome");
+        }
+        co.setAcceptInsecureCerts(isInsecureCertsEnabled());
+        return co;
+    }
+
     Map<String, ChromeDriverService> getServices() {
         return services;
     }
@@ -71,7 +86,7 @@ public class ChromeDriverConfig extends WebDriverConfig<ChromeDriver> {
     @Override
     protected ChromeDriver createBrowser() {
         final ChromeDriverService service = getThreadService();
-        return service != null ? new ChromeDriver(service, createCapabilities()) : null;
+        return service != null ? new ChromeDriver(service, createChromeOptions()) : null;
     }
 
     @Override

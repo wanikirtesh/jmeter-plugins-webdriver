@@ -12,6 +12,7 @@ public class ChromeDriverConfigGui extends WebDriverConfigGui {
 
     private static final long serialVersionUID = 100L;
     JTextField chromeServicePath;
+    JTextField isHeadless;
     JCheckBox androidEnabled;
     private JCheckBox headlessEnabled;
     private JCheckBox insecureCertsEnabled;
