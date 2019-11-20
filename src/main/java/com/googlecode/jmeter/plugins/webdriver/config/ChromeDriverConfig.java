@@ -44,14 +44,14 @@ public class ChromeDriverConfig extends WebDriverConfig<ChromeDriver> {
 		capabilities.setCapability(CapabilityType.LOGGING_PREFS, logPrefs);
         
 
-        if(isAndroidEnabled() || isHeadlessEnabled()) {
+        if(isAndroidEnabled() || isHeadlessEnabled().equalsIgnoreCase("true")) {
             //Map<String, String> chromeOptions = new HashMap<String, String>();
             //chromeOptions.put("androidPackage", "com.android.chrome");
             ChromeOptions chromeOptions = new ChromeOptions();
             if (isAndroidEnabled()) {
                 chromeOptions.setExperimentalOption("androidPackage", "com.android.chrome");
             }
-            if (isHeadlessEnabled()) {
+            if (isHeadlessEnabled().equalsIgnoreCase("true")) {
                 chromeOptions.addArguments("--headless");
 
             }
@@ -71,7 +71,7 @@ public class ChromeDriverConfig extends WebDriverConfig<ChromeDriver> {
         LoggingPreferences logPrefs = new LoggingPreferences();
         logPrefs.enable(LogType.BROWSER, Level.ALL);
         co.setCapability(CapabilityType.LOGGING_PREFS, logPrefs);
-        co.setHeadless(isHeadlessEnabled());
+        co.setHeadless(isHeadlessEnabled().equalsIgnoreCase("true"));
         if (isAndroidEnabled()) {
             co.setExperimentalOption("androidPackage", "com.android.chrome");
         }
@@ -122,11 +122,11 @@ public class ChromeDriverConfig extends WebDriverConfig<ChromeDriver> {
         setProperty(ANDROID_ENABLED, enabled);
     }
 
-    public boolean isHeadlessEnabled() {
-        return getPropertyAsBoolean(HEADLESS_ENABLED);
+    public String isHeadlessEnabled() {
+        return getPropertyAsString(HEADLESS_ENABLED);
     }
 
-    public void setHeadlessEnabled(boolean enabled) {
+    public void setHeadlessEnabled(String enabled) {
         setProperty(HEADLESS_ENABLED, enabled);
     }
 

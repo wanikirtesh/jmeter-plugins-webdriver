@@ -196,9 +196,9 @@ public class ChromeDriverConfigTest {
 
     @Test
     public void getSetHeadlessEnabled() {
-        assertThat(config.isHeadlessEnabled(), is(false));
-        config.setHeadlessEnabled(true);
-        assertThat(config.isHeadlessEnabled(), is(true));
+        assertThat(config.isHeadlessEnabled().equalsIgnoreCase("true"), is(false));
+        config.setHeadlessEnabled("true");
+        assertThat(config.isHeadlessEnabled().equalsIgnoreCase("true"), is(true));
     }
 
     @Test

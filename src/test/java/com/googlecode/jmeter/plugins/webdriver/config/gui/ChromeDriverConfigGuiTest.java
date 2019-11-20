@@ -59,9 +59,9 @@ public class ChromeDriverConfigGuiTest {
 
     @Test
     public void shouldSetHeadlessEnabled() {
-        gui.getHeadlessEnabled().setSelected(true);
+        gui.getHeadlessEnabled().setText("true");
         final ChromeDriverConfig testElement = (ChromeDriverConfig) gui.createTestElement();
-        assertThat(testElement.isHeadlessEnabled(), is(true));
+        assertThat(testElement.isHeadlessEnabled(), is("true"));
     }
 
     @Test
@@ -75,14 +75,14 @@ public class ChromeDriverConfigGuiTest {
     public void shouldResetValuesOnClearGui() {
         gui.chromeServicePath.setText("path");
         gui.androidEnabled.setSelected(true);
-        gui.getHeadlessEnabled().setSelected(true);
+        gui.getHeadlessEnabled().setText("true");
         gui.getInsecureCertsEnabled().setSelected(true);
 
         gui.clearGui();
 
         assertThat(gui.chromeServicePath.getText(), is(""));
         assertThat(gui.androidEnabled.isSelected(), is(false));
-        assertThat(gui.getHeadlessEnabled().isSelected(), is(false));
+        assertThat(gui.getHeadlessEnabled().getText().equalsIgnoreCase("true"), is(false));
         assertThat(gui.getInsecureCertsEnabled().isSelected(), is(false));
     }
 
@@ -107,10 +107,10 @@ public class ChromeDriverConfigGuiTest {
     @Test
     public void shouldSetHeadlessEnabledOnConfigure() {
         ChromeDriverConfig config = new ChromeDriverConfig();
-        config.setHeadlessEnabled(true);
+        config.setHeadlessEnabled("true");
         gui.configure(config);
 
-        assertThat(gui.getHeadlessEnabled().isSelected(), is(config.isHeadlessEnabled()));
+        assertThat(gui.getHeadlessEnabled().getText(), is(config.isHeadlessEnabled()));
     }
 
     @Test

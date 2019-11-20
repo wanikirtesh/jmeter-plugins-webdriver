@@ -70,6 +70,8 @@ public abstract class WebDriverConfigGui extends AbstractConfigGui implements It
 
     JCheckBox maximizeBrowser;
 
+
+
     /*
      * THE FOLLOWING ATTRIBUTES ARE EXPERIMENTAL - USE WITH CAUTION
      */
